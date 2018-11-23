@@ -1,0 +1,92 @@
+{
+    "3506102": {
+        "municipio": "BEBEDOURO",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.bebedouro"
+    },
+    "3508504": {
+        "municipio": "CACAPAVA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.cacapava"
+    },
+    "3509007": {
+        "municipio": "CAIEIRAS",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.caieiras"
+    },
+    "3515103": {
+        "municipio": "EMBU-GUACU",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.embuguacu"
+    },
+    "3515707": {
+        "municipio": "FERRAZ DE VASCONCELOS",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.ferraz"
+    },
+    "3523602": {
+        "municipio": "ITIRAPINA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.itirapina"
+    },
+    "3525300": {
+        "municipio": "JAU",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.jahu"
+    },
+    "3526902": {
+        "municipio": "LIMEIRA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.limeira"
+    },
+    "3528502": {
+        "municipio": "MAIRIPORA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.mairipora"
+    },
+    "3532827": {
+        "municipio": "NOVA CAMPINA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.novacampina"
+    },
+    "3539806": {
+        "municipio": "POA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.poa"
+    },
+    "3547908": {
+        "municipio": "SANTO ANTONIO DA ALEGRIA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.santoantoniodaalegria"
+    },
+    "3552809": {
+        "municipio": "TABOAO DA SERRA",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.taboaodaserra"
+    },
+    "3554102": {
+        "municipio": "TAUBATE",
+        "uf": "SP",
+        "versao": "2.00",
+        "uri": "sp.taubate"
+    },
+    "3170701": {
+        "municipio": "VARGINHA",
+        "uf": "MG",
+        "versao": "2.00",
+        "uri": "mg.varginha"
+    }
+}
