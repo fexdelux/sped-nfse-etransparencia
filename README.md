@@ -43,7 +43,7 @@ Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.goog
 
 ### Municipos Atendidos pelo modelo Conam (eTransparencia)
 
-Os dados cadastrais dos municipios estão em [storage/municipios_sigcorp.json](storage/municipios_sigcorp.json)
+Os dados cadastrais dos municipios estão em [storage/municipios_conam.json](storage/municipios_conam.json)
 
 
 - Bebedouro - SP

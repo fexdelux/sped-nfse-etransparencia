@@ -31,7 +31,7 @@ class Factory
      */
     protected $dom;
     /**
-     * @var DOMNode
+     * @var DOMElement
      */
     protected $rps;
 
@@ -296,7 +296,7 @@ class Factory
         
         if (!empty($this->std->tributos)) {
             $trib = $this->dom->createElement('nfe:Reg30');
-            foreach($this->std->tributos as $t) {
+            foreach ($this->std->tributos as $t) {
                 $node = $this->dom->createElement('nfe:Reg30Item');
                 $this->dom->addChild(
                     $node,

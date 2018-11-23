@@ -39,13 +39,13 @@ class Tools extends BaseTools
      * @param string $serienfse
      * @param string $serierps
      * @param string $numerorps
-     * @return type
+     * @return string
      */
     public function cancelarNfse(
         $cancelarGuia,
         $valor,
         $motivo,
-        $numeronfse = null, 
+        $numeronfse = null,
         $serienfse = null,
         $serierps = null,
         $numerorps = null
@@ -54,13 +54,13 @@ class Tools extends BaseTools
         $content = "<nfe:Sdt_cancelanfe>"
             . $this->login()
             . "<nfe:Nota>";
-        if (!empty($numeronfse)) {   
+        if (!empty($numeronfse)) {
             $content .= "<nfe:SerieNota>$serienfse</nfe:SerieNota>"
             . "<nfe:NumeroNota>$numeronfse</nfe:NumeroNota>";
-        } else {   
+        } else {
             if (isset($serierps)) {
                 $content .= "<nfe:SerieRPS>$serierps</nfe:SerieRPS>";
-            }    
+            }
             $content .= "<nfe:NumeroRps>$numerorps</nfe:NumeroRps>";
         }
         $content .= "<nfe:ValorNota>" . number_format($valor, 2, ',', '') ."</nfe:ValorNota>"
@@ -127,7 +127,7 @@ class Tools extends BaseTools
             . "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>"
             . "<nfe:Reg20>"
             . $this->reg20
-            . "</nfe:Reg20>"                 
+            . "</nfe:Reg20>"
             . $this->reg90
             . "</nfe:SDTRPS>"
             . "</nfe:Sdt_processarpsin>";
@@ -135,7 +135,7 @@ class Tools extends BaseTools
     }
     
     /**
-     * Validação de NFSe 
+     * Validação de NFSe
      * @param array $arps
      * @return string
      */
@@ -157,7 +157,7 @@ class Tools extends BaseTools
             . "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>"
             . "<nfe:Reg20>"
             . $this->reg20
-            . "</nfe:Reg20>"    
+            . "</nfe:Reg20>"
             . $this->reg90
             . "</nfe:SDTRPS>"
             . "</nfe:Sdt_processarpsin>";
@@ -225,7 +225,7 @@ class Tools extends BaseTools
             . "</nfe:Reg90>";
         
         $tot = [
-            'ano' => $dtFim->format('Y'), 
+            'ano' => $dtFim->format('Y'),
             'mes' => $dtFim->format('m'),
             'dtini' => $dtIni->format('d/m/Y'), //extraido dos RPS
             'dtfin' => $dtFim->format('d/m/Y') //extraido dos RPS
@@ -236,10 +236,10 @@ class Tools extends BaseTools
     /**
      * Compare dates
      * @param \Datetime $dt1
-     * @param DateTime $dt2
+     * @param \DateTime $dt2
      * @return \Datetime|DateTime
      */
-    protected function bigger(Datetime $dt1, DateTime $dt2)
+    protected function bigger(DateTime $dt1, DateTime $dt2)
     {
         if ($dt1 > $dt2) {
             return $dt1;
@@ -254,7 +254,7 @@ class Tools extends BaseTools
      * @param \DateTime $dt2
      * @return \Datetime
      */
-    protected function smaller(Datetime $dt1, DateTime $dt2)
+    protected function smaller(DateTime $dt1, DateTime $dt2)
     {
         if ($dt1 < $dt2) {
             return $dt1;
