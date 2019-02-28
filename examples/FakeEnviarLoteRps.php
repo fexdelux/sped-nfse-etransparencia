@@ -44,7 +44,7 @@ try {
     $std->tipo = "RPS"; //Tipo de NFS 'RPS' e 'RPC'.
     $std->numero = 12; //9 numericos
     $std->serie = "A"; //string 3
-    $std->dtemi = "28/02/2019"; //dd/mm/yyyy
+    $std->dtemi = "2019-02-28"; //yyyy-mm-dd
     $std->retfonte = "SIM"; //retenção na fonte SIM ou NAO.
     $std->codsrv = "16.38"; //codigo do serviço string até 10
     $std->discrsrv = 'Discriminação da natureza do serviço prestado \\\ indica quebra de linha'; //Discriminação da natureza do serviço prestado \\ indica quebra de linha

@@ -59,6 +59,8 @@ class Factory
      */
     public function render()
     {
+        $dt = new \DateTime($this->std->dtemi);
+        
         $this->dom->addChild(
             $this->rps,
             "nfe:TipoNFS",
@@ -80,7 +82,7 @@ class Factory
         $this->dom->addChild(
             $this->rps,
             "nfe:DtEmi",
-            $this->std->dtemi,
+            $dt->format('d/m/Y'),
             true
         );
         $this->dom->addChild(
