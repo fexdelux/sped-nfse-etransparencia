@@ -112,12 +112,6 @@ class Tools extends BaseTools
     public function enviarLoteRps($arps)
     {
         $operation = 'PROCESSARPS';
-        $tot = new \stdClass();
-        $tot->ano = '';
-        $tot->mes = '';
-        $tot->dtini = '';
-        $tot->dtfin = '';
-        
         $tot = $this->totalize($arps);
         $content = "<nfe:Sdt_processarpsin>"
             . $this->login()
