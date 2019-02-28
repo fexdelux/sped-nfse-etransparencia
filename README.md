@@ -2,7 +2,7 @@
 
 Api para comunicação com webservices do Modelo Conam (eTransparencia)
 
-## ALPHA TESTES (não foram feitos testes reais até o momento)
+## BETHA TESTES (testes iniciais para identificação de BUGS)
 
 [![Latest Stable Version][ico-stable]][link-packagist]
 [![Build Status][ico-travis]][link-travis]
@@ -60,8 +60,11 @@ Os dados cadastrais dos municipios estão em [storage/municipios_conam.json](sto
 - Poa - SP
 - Taboão da Serra - SP
 - Santo Antonio da Alegria - SP
-
 - Varginha - MG
+
+## Agradecimentos 
+
+- Junior Pires (realização de testes práticos)
 
 ## Contribuindo
 Este é um projeto totalmente *OpenSource*, para usa-lo e modifica-lo você não paga absolutamente nada. Porém para continuarmos a mante-lo é necessário qua alguma contribuição seja feita, seja auxiliando na codificação, na documentação ou na realização de testes e identificação de falhas e BUGs.
