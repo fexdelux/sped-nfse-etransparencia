@@ -111,13 +111,16 @@ class Tools
     protected function cdtata($content)
     {
         if ($this->config->webservice == 1) {
-            return content;
+            return $content;
         }
+        return "<nfe:Xml_entrada>" . $content . "</nfe:Xml_entrada>";
+        /*
         $dom = new \DOMDocument();
         $node = $dom->appendChild($dom->createElement('nfe:Xml_entrada'));
         $node->appendChild($dom->createCDATASection($content));
         $content = $dom->saveXML($dom->documentElement);
         return $content;
+         */
     }
 
     /**
