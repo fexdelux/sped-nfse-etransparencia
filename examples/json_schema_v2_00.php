@@ -202,14 +202,14 @@ $jsonSchema = '{
             "required": false,
             "type": ["array","null"],
             "minItems": 0,
-            "maxItems": 10,
+            "maxItems": 5,
             "items": {
                 "type": "object",
                 "properties": {
                     "sigla": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^.{1,10}$"
+                        "pattern": "^(COFINS|CSLL|INSS|IR|PIS)$"
                     },
                     "aliquota": {
                         "required": true,

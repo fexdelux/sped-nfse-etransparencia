@@ -218,9 +218,11 @@ class Tools extends BaseTools
                 $ValorISS += round(($rps->std->alqiss/100)*$rps->std->vlnfs, 2);
                 $ValorDed += $rps->std->vlded;
                 $ValorIssRetTom += $rps->std->vlissret;
-                $QtdReg30 += count($rps->std->tributos);
-                foreach ($rps->std->tributos as $trib) {
-                    $ValorTributos += $trib->valor;
+                if (!empty($rps->std->tributos)) {
+                    foreach ($rps->std->tributos as $trib) {
+                        $QtdReg30++;
+                        $ValorTributos += $trib->valor;
+                    }
                 }
             }
             $this->reg20 .= $rps->render();

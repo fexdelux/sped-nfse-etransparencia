@@ -123,6 +123,7 @@ class Factory
         );
         
         $vlbascalc = $this->std->vlnfs - $this->std->vlded;
+        
         $this->dom->addChild(
             $this->rps,
             "nfe:VlBasCalc",
@@ -138,19 +139,33 @@ class Factory
         );
         
         $vliss = round(($this->std->alqiss/100)*$vlbascalc, 2);
-        $this->dom->addChild(
-            $this->rps,
-            "nfe:VlIss",
-            number_format($vliss, 2, ',', ''),
-            true
-        );
-        
-        $this->dom->addChild(
-            $this->rps,
-            "nfe:VlIssRet",
-            number_format($this->std->vlissret, 2, ',', ''),
-            true
-        );
+        if ($this->std->retfonte == 'SIM') {
+            $this->dom->addChild(
+                $this->rps,
+                "nfe:VlIss",
+                '0',
+                true
+            );
+            $this->dom->addChild(
+                $this->rps,
+                "nfe:VlIssRet",
+                number_format($this->std->vlissret, 2, ',', ''),
+                true
+            );
+        } else {
+            $this->dom->addChild(
+                $this->rps,
+                "nfe:VlIss",
+                number_format($vliss, 2, ',', ''),
+                true
+            );
+            $this->dom->addChild(
+                $this->rps,
+                "nfe:VlIssRet",
+                '0',
+                true
+            );
+        }
         
         //tomador
         $tom = $this->std->tomador;
