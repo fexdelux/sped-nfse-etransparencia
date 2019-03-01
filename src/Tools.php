@@ -162,6 +162,7 @@ class Tools extends BaseTools
         }
             $content .= "</Nota>"
             . "</SDT_IMPRESSAO_IN>";
+        
         return $this->send($content, $operation);
     }
     
