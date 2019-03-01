@@ -23,6 +23,18 @@ try {
         'tpamb'        => 2 //1-producao, 2-homologacao
     ];
 
+    /**
+     * tipotrib
+     * 1 - Tributado. O Serviço é tributado de acordo com a alíquota ISS da lista de serviços da prefeitura;
+     * 2 - Isenção / Imunidade. Neste caso a alíquota de ISS é igual a zero.
+     * 3 - Suspensão. Se a tributação está em decisão judicial, será acatada a alíquota de ISS informada no RPS, podendo esta ser igual a zero.
+     * 4 - Simples Nacional. O serviço é tributado de acordo com a alíquota do contribuinte no Simples Nacional;
+     * 5 - ISS Fixo; Neste caso a alíquota de ISS a enviar deve ser igual a zero.
+     * 6 - Isenção parcial. O serviço é tributado de acordo com a Alíquota no Cadastro do contribuinte. Esta não é a alíquota do simples nacional.
+     * Este numero deve corresponder ao mesmo tipo de tributação do cadastro do contribuinte.
+     */
+    
+    
     $configJson = json_encode($config);
     $soap = new SoapFake();
     

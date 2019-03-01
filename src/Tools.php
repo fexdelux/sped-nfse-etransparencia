@@ -112,20 +112,12 @@ class Tools extends BaseTools
     public function enviarLoteRps($arps)
     {
         $operation = 'PROCESSARPS';
-        $tot = $this->totalize($arps);
         $content = "<nfe:Sdt_processarpsin>"
             . $this->login()
             . "<nfe:SDTRPS>"
-            . "<nfe:Ano>{$tot->ano}</nfe:Ano>"
-            . "<nfe:Mes>{$tot->mes}</nfe:Mes>"
-            . "<nfe:CPFCNPJ>{$this->config->cnpj}</nfe:CPFCNPJ>"
-            . "<nfe:DTIni>{$tot->dtini}</nfe:DTIni>"
-            . "<nfe:DTFin>{$tot->dtfin}</nfe:DTFin>"
-            . "<nfe:TipoTrib>{$this->config->tipotrib}</nfe:TipoTrib>"
-            . "<nfe:DtAdeSN>{$this->config->dtadesn}</nfe:DtAdeSN>"
-            . "<nfe:AlqIssSN_IP>{$this->config->alqisssn}</nfe:AlqIssSN_IP>"
-            . "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>"
-            . "<nfe:Reg20>"
+            . $this->buildInfo($this->totalize($arps));
+        
+        $content .= "<nfe:Reg20>"
             . $this->reg20
             . "</nfe:Reg20>"
             . $this->reg90
@@ -146,16 +138,9 @@ class Tools extends BaseTools
         $content = "<nfe:Sdt_processarpsin>"
             . $this->login()
             . "<nfe:SDTRPS>"
-            . "<nfe:Ano>{$tot->ano}</nfe:Ano>"
-            . "<nfe:Mes>{$tot->mes}</nfe:Mes>"
-            . "<nfe:CPFCNPJ>{$this->config->cnpj}</nfe:CPFCNPJ>"
-            . "<nfe:DTIni>{$tot->dtini}</nfe:DTIni>"
-            . "<nfe:DTFin>{$tot->dtfin}</nfe:DTFin>"
-            . "<nfe:TipoTrib>{$this->config->tipotrib}</nfe:TipoTrib>"
-            . "<nfe:DtAdeSN>{$this->config->dtadesn}</nfe:DtAdeSN>"
-            . "<nfe:AlqIssSN_IP>{$this->config->alqisssn}</nfe:AlqIssSN_IP>"
-            . "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>"
-            . "<nfe:Reg20>"
+            . $this->buildInfo($this->totalize($arps));
+        
+        $content .= "<nfe:Reg20>"
             . $this->reg20
             . "</nfe:Reg20>"
             . $this->reg90
@@ -164,6 +149,33 @@ class Tools extends BaseTools
         return $this->send($content, $operation);
     }
     
+    /**
+     * Constoi informações
+     * @param \stdClass $tot
+     * @return string
+     */
+    protected function buildInfo($tot)
+    {
+         $content = "<nfe:Ano>{$tot->ano}</nfe:Ano>"
+            . "<nfe:Mes>{$tot->mes}</nfe:Mes>"
+            . "<nfe:CPFCNPJ>{$this->config->cnpj}</nfe:CPFCNPJ>"
+            . "<nfe:DTIni>{$tot->dtini}</nfe:DTIni>"
+            . "<nfe:DTFin>{$tot->dtfin}</nfe:DTFin>"
+            . "<nfe:TipoTrib>{$this->config->tipotrib}</nfe:TipoTrib>";
+        if ($this->config->tipotrib == 4) {
+            $content .= "<nfe:DtAdeSN>{$this->config->dtadesn}</nfe:DtAdeSN>";
+        } else {
+            $content .= "<nfe:DtAdeSN/>";
+        }
+        if ($this->config->tipotrib == 4 || $this->config->tipotrib == 6) {
+            $content .=  "<nfe:AlqIssSN_IP>{$this->config->alqisssn}</nfe:AlqIssSN_IP>";
+        } else {
+            $content .=  "<nfe:AlqIssSN_IP/>";
+        }
+        $content .=  "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>";
+        return $content;
+    }
+
     /**
      * Build tag login
      * @return string
