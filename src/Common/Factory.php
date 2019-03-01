@@ -112,17 +112,17 @@ class Factory
         $this->dom->addChild(
             $this->rps,
             "nfe:VlDed",
-            number_format($this->std->vlded, 2, ',', ''),
+            !empty($this->std->vlded) ? number_format($this->std->vlded, 2, ',', '') : 0,
             true
         );
         $this->dom->addChild(
             $this->rps,
             "nfe:DiscrDed",
-            $this->std->discrded,
+            !empty($this->std->discrded) ? $this->std->discrded : '',
             true
         );
         
-        $vlbascalc = $this->std->vlnfs - $this->std->vlded;
+        $vlbascalc = $this->std->vlnfs - (!empty($this->std->vlded) ? $this->std->vlded : 0);
         
         $this->dom->addChild(
             $this->rps,
@@ -138,7 +138,7 @@ class Factory
             true
         );
         
-        $vliss = round(($this->std->alqiss/100)*$vlbascalc, 2);
+        
         if ($this->std->retfonte == 'SIM') {
             $this->dom->addChild(
                 $this->rps,
@@ -153,6 +153,7 @@ class Factory
                 true
             );
         } else {
+            $vliss = round(($this->std->alqiss/100)*$vlbascalc, 2);
             $this->dom->addChild(
                 $this->rps,
                 "nfe:VlIss",

@@ -43,8 +43,8 @@
             "type": "number"
         },
         "vlded": {
-            "required": true,
-            "type": "number"
+            "required": false,
+            "type": ["number","null"]
         },
         "discrded": {
             "required": false,
@@ -56,8 +56,8 @@
             "type": "number"
         },
         "vlissret": {
-            "required": true,
-            "type": "number"
+            "required": false,
+            "type": ["number", "null"]
         },
         "tomador": {
             "required": true,

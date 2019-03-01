@@ -30,7 +30,11 @@ class Tools
     protected $soap;
     protected $environment;
     protected $storage;
-    
+    protected $ws = [
+        1 => 'webservice',
+        2 => 'webservice_v2'
+    ];
+
     /**
      * Constructor
      * @param string $config
@@ -46,11 +50,14 @@ class Tools
         if (empty($urls[$this->config->cmun])) {
             throw new \Exception("O municipio [{$this->config->cmun}] não consta da lista dos atendidos.");
         }
+        if (empty($this->config->webservice)) {
+            $this->config->webservice = 1;
+        }
         $this->wsobj = json_decode(json_encode($urls[$this->config->cmun]));
         $this->wsobj->homologacao = "https://nfehomologacao.etransparencia.com.br"
-            . "/{$this->wsobj->uri}/webservice/aws_nfe.aspx";
+            . "/{$this->wsobj->uri}/{$this->ws[$this->config->webservice]}/aws_nfe.aspx";
         $this->wsobj->producao = "https://nfe.etransparencia.com.br"
-            . "/{$this->wsobj->uri}/webservice/aws_nfe.aspx";
+            . "/{$this->wsobj->uri}/{$this->ws[$this->config->webservice]}/aws_nfe.aspx";
         $this->environment = 'homologacao';
         if ($this->config->tpamb === 1) {
             $this->environment = 'producao';

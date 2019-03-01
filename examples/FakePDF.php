@@ -31,16 +31,15 @@ try {
     $tools = new Tools($configJson);
     $tools->loadSoapClass($soap);
 
-    $cancelarGuia = 'S';
-    $valor = 2000.00;
-    $motivo = 'Teste de cancelamento';
-    $numeronfse = 12;
-    $serienfse = 1;
-    $serierps = null;
-    $numerorps = null;
+    $mes = '02';
+    $ano = '2019';
+    $nfe_num = null;
+    $nfe_serie = null;
+    $rps_num = 1;
+    $rps_serie = '001';
 
-    $response = $tools->cancelarNfse(
-        $cancelarGuia, $valor, $motivo, $numeronfse, $serienfse, $serierps, $numerorps
+    $response = $tools->pdf(
+        $mes, $ano, $nfe_num, $nfe_serie, $rps_num, $rps_serie
     );
 
     echo FakePretty::prettyPrint($response, '');

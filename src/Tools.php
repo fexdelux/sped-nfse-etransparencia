@@ -22,7 +22,7 @@ use DateTime;
 
 class Tools extends BaseTools
 {
-    protected $reg20 = '';
+    protected $reg20 = [];
     protected $reg90 = '';
     
     public function __construct($config)
@@ -80,7 +80,6 @@ class Tools extends BaseTools
     public function consultarNfse($protocolo)
     {
         $operation = "CONSULTAPROTOCOLO";
-        
         $content = "<nfe:Sdt_consultaprotocoloin>"
             . "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
             . $this->login()
@@ -112,18 +111,7 @@ class Tools extends BaseTools
     public function enviarLoteRps($arps)
     {
         $operation = 'PROCESSARPS';
-        $content = "<nfe:Sdt_processarpsin>"
-            . $this->login()
-            . "<nfe:SDTRPS>"
-            . $this->buildInfo($this->totalize($arps));
-        
-        $content .= "<nfe:Reg20>"
-            . $this->reg20
-            . "</nfe:Reg20>"
-            . $this->reg90
-            . "</nfe:SDTRPS>"
-            . "</nfe:Sdt_processarpsin>";
-        return $this->send($content, $operation);
+        return $this->send($this->buildRps($arps), $operation);
     }
     
     /**
@@ -134,20 +122,68 @@ class Tools extends BaseTools
     public function validarLoteRps($arps)
     {
         $operation = "VERFICARPS";
-        $content = "<nfe:Sdt_processarpsin>"
-            . $this->login()
-            . "<nfe:SDTRPS>"
-            . $this->buildInfo($this->totalize($arps));
+        return $this->send($this->buildRps($arps), $operation);
+    }
+    
+    /**
+     * Gera PDF da NFSe
+     * @param string $mes
+     * @param string $ano
+     * @param string $nfe_num
+     * @param string $nfe_serie
+     * @param string $rps_num
+     * @param string $rps_serie
+     */
+    public function pdf(
+        $mes,
+        $ano,
+        $nfe_num = null,
+        $nfe_serie = null,
+        $rps_num = null,
+        $rps_serie = null
+    ) {
+        //funciona apenas no wevservice V2 ou maior
+        if ($this->config->webservice == 1) {
+            return;
+        }
         
-        $content .= "<nfe:Reg20>"
-            . $this->reg20
-            . "</nfe:Reg20>"
-            . $this->reg90
-            . "</nfe:SDTRPS>"
-            . "</nfe:Sdt_processarpsin>";
+        $operation = "IMPRESSAOLINKNFSE";
+        $content = "<SDT_IMPRESSAO_IN xmlns=\"NFe\">"
+            . $this->login()
+            . "<Nota>"
+            . "<Competencia_Mes>{$mes}</Competencia_Mes>"
+            . "<Competencia_Ano>{$ano}</Competencia_Ano>";
+        if (!empty($rps_serie) && !empty($rps_num)) {
+            $content .= "<RPS_Serie>{$rps_serie}</RPS_Serie>"
+            . "<RPS_Numero>{$rps_num}</RPS_Numero>";
+        } else {
+            $content .= "<Nota_Serie>{$nfe_serie}</Nota_Serie>"
+            . "<Nota_Numero>{$rps_num}</Nota_Numero>";
+        }
+            $content .= "</Nota>"
+            . "</SDT_IMPRESSAO_IN>";
         return $this->send($content, $operation);
     }
     
+    protected function buildRps($arps)
+    {
+        $content = "<nfe:Sdt_processarpsin>"
+            . $this->login()
+            . "<nfe:SDTRPS>"
+            . $this->buildInfo($this->totalize($arps))
+            . "<nfe:Reg20>";
+        
+        foreach ($this->reg20 as $r20) {
+            $content .= $r20;
+        }
+        $content .= "</nfe:Reg20>".
+            $this->reg90
+            . "</nfe:SDTRPS>"
+            . "</nfe:Sdt_processarpsin>";
+        return $content;
+    }
+
+
     /**
      * Constoi informações
      * @param \stdClass $tot
@@ -215,8 +251,8 @@ class Tools extends BaseTools
                 $QtdRegNormal++;
                 $ValorNFS += $rps->std->vlnfs;
                 $ValorISS += round(($rps->std->alqiss/100)*$rps->std->vlnfs, 2);
-                $ValorDed += $rps->std->vlded;
-                $ValorIssRetTom += $rps->std->vlissret;
+                $ValorDed += !empty($rps->std->vlded) ? $rps->std->vlded : 0;
+                $ValorIssRetTom += !empty($rps->std->vlissret) ? $rps->std->vlissret : 0;
                 if (!empty($rps->std->tributos)) {
                     foreach ($rps->std->tributos as $trib) {
                         $QtdReg30++;
@@ -224,7 +260,7 @@ class Tools extends BaseTools
                     }
                 }
             }
-            $this->reg20 .= $rps->render();
+            $this->reg20[] = $rps->render();
         }
         
         $this->reg90 = "<nfe:Reg90>"
