@@ -109,16 +109,16 @@ try {
     $std->tomador->localprestacao->cep = "02145000"; //numerico 8 Se <SiglaUFLocpre> = 'EX' campo do CEP deve vir zerado
 
 
-    $std->tributos[0] = new stdClass();
-    $std->tributos[0]->sigla = "COFINS"; //Caracter 10 Siglas de tributos permitidas:
+    //$std->tributos[0] = new stdClass(); Não Obrigatorio
+    //$std->tributos[0]->sigla = "COFINS"; //Caracter 10 Siglas de tributos permitidas:
     // COFINS
     // CSLL
     // INSS
     // IR
     // PIS
     // Caso tenha algum que não esteja na lista deve verificar com a prefeitura.
-    $std->tributos[0]->aliquota = 0.98; //numerico 5,2 
-    $std->tributos[0]->valor = 14.98; //Numérico 10,2
+    //$std->tributos[0]->aliquota = 0.98; //numerico 5,2 
+    //$std->tributos[0]->valor = 14.98; //Numérico 10,2
     
     $arps[] = new Rps($std);
     

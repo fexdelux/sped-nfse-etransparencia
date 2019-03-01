@@ -197,7 +197,7 @@
                     "sigla": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^.{1,10}$"
+                        "pattern": "^(COFINS|CSLL|INSS|IR|PIS)$"
                     },
                     "aliquota": {
                         "required": true,
