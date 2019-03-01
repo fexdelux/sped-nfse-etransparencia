@@ -134,7 +134,6 @@ class Tools extends BaseTools
     public function validarLoteRps($arps)
     {
         $operation = "VERFICARPS";
-        $tot = $this->totalize($arps);
         $content = "<nfe:Sdt_processarpsin>"
             . $this->login()
             . "<nfe:SDTRPS>"

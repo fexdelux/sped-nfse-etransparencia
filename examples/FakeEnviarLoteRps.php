@@ -17,9 +17,9 @@ try {
         'razao'        => 'Empresa Test Ltda',
         'usuario'      => '1929292', //codigo do usuário usado no login
         'contribuinte' => 'ksjksjkjs', //codigo do contribunte usado no login
-        'tipotrib'     => 1,
+        'tipotrib'     => 4,
         'dtadesn'      => '01/01/2017',
-        'alqisssn'     => 1.00,
+        'alqisssn'     => 0.00,
         'tpamb'        => 2 //1-producao, 2-homologacao
     ];
 
@@ -61,7 +61,7 @@ try {
     //será considerado na impressão da nota gerada.
 //calcular no factory $std->VlBasCalc = ""; //Numérico 16,2 Deve ser igual ao informado no campo valor da nota menos
     //o informado no campo de valor de dedução
-    $std->alqiss = 1.00; //Numérico 5,2
+    $std->alqiss = 0.00; //Numérico 5,2
 //calcular no factory $std->vliss = 111.11; //Numérico 16,2 Obrigatório se <RetFonte> = 'NAO' Valor igual a 0 (zero) se <RetFonte> = 'SIM’
     $std->vlissret = 34.55; //Numérico 16,2 Obrigatório se <RetFonte> = 'SIM' Valor igual a 0 (zero) se <RetFonte> = 'NAO'
 
