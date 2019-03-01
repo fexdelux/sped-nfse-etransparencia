@@ -117,8 +117,8 @@ class Tools
         $node = $dom->appendChild($dom->createElement('nfe:Xml_entrada'));
         $node->appendChild($dom->createCDATASection($content));
         $content = $dom->saveXML($dom->documentElement);
-        return $content;    
-    }    
+        return $content;
+    }
 
     /**
      * Build SOAP request
