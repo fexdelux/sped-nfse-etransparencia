@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 require_once '../bootstrap.php';
 
-use NFePHP\Common\Certificate;
 use NFePHP\NFSeTrans\Tools;
 use NFePHP\NFSeTrans\Rps;
 use NFePHP\NFSeTrans\Common\Soap\SoapFake;
@@ -24,18 +23,10 @@ try {
         'tpamb'        => 2 //1-producao, 2-homologacao
     ];
 
-
     $configJson = json_encode($config);
-
-    //$content = file_get_contents('expired_certificate.pfx');
-    //$password = 'associacao';
-    //$cert = Certificate::readPfx($content, $password);
-    $cert = null;
-    
     $soap = new SoapFake();
-    $soap->disableCertValidation(true);
     
-    $tools = new Tools($configJson, $cert);
+    $tools = new Tools($configJson);
     $tools->loadSoapClass($soap);
     
     $arps = [];

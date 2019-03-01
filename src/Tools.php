@@ -25,9 +25,9 @@ class Tools extends BaseTools
     protected $reg20 = '';
     protected $reg90 = '';
     
-    public function __construct($config, Certificate $cert = null)
+    public function __construct($config)
     {
-        parent::__construct($config, $cert);
+        parent::__construct($config);
     }
     
     /**
