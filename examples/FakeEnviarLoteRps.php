@@ -20,7 +20,8 @@ try {
         'tipotrib'     => 4,
         'dtadesn'      => '01/01/2017',
         'alqisssn'     => 0.00,
-        'tpamb'        => 2 //1-producao, 2-homologacao
+        'tpamb'        => 2, //1-producao, 2-homologacao
+        'webservice' => 2
     ];
 
     /**
