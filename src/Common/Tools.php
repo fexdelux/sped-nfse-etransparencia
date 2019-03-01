@@ -108,6 +108,17 @@ class Tools
         return $response;
     }
     
+    protected function cdtata($content)
+    {
+        if ($this->config->webservice == 1) {
+            return content;
+        }
+        $dom = new \DOMDocument();
+        $node = $dom->appendChild($dom->createElement('nfe:Xml_entrada'));
+        $node->appendChild($dom->createCDATASection($content));
+        $content = $dom->saveXML($dom->documentElement);
+        return $content;    
+    }    
 
     /**
      * Build SOAP request
@@ -123,7 +134,7 @@ class Tools
             . "<soapenv:Header/>"
             . "<soapenv:Body>"
             . "<nfe:ws_nfe.$operation>"
-            . $message
+            . $this->cdtata($message)
             . "</nfe:ws_nfe.$operation>"
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
