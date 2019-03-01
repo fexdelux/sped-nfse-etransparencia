@@ -21,7 +21,7 @@ try {
         'dtadesn'      => '01/01/2017',
         'alqisssn'     => 1.00,
         'tpamb'        => 2, //1-producao, 2-homologacao
-        'webservice'   => 2
+        'webservice'   => 1
     ];
 
     $configJson = json_encode($config);

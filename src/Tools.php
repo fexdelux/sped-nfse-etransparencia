@@ -148,20 +148,20 @@ class Tools extends BaseTools
         }
         
         $operation = "IMPRESSAOLINKNFSE";
-        $content = "<SDT_IMPRESSAO_IN xmlns=\"NFe\">"
+        $content = "<nfe:SDT_IMPRESSAO_IN>"
             . $this->login()
-            . "<Nota>"
-            . "<Competencia_Mes>{$mes}</Competencia_Mes>"
-            . "<Competencia_Ano>{$ano}</Competencia_Ano>";
+            . "<nfe:Nota>"
+            . "<nfe:Competencia_Mes>{$mes}</nfe:Competencia_Mes>"
+            . "<nfe:Competencia_Ano>{$ano}</nfe:Competencia_Ano>";
         if (!empty($rps_serie) && !empty($rps_num)) {
-            $content .= "<RPS_Serie>{$rps_serie}</RPS_Serie>"
-            . "<RPS_Numero>{$rps_num}</RPS_Numero>";
+            $content .= "<nfe:RPS_Serie>{$rps_serie}</nfe:RPS_Serie>"
+            . "<nfe:RPS_Numero>{$rps_num}</nfe:RPS_Numero>";
         } else {
-            $content .= "<Nota_Serie>{$nfe_serie}</Nota_Serie>"
-            . "<Nota_Numero>{$rps_num}</Nota_Numero>";
+            $content .= "<nfe:Nota_Serie>{$nfe_serie}</nfe:Nota_Serie>"
+            . "<nfe:Nota_Numero>{$rps_num}</nfe:Nota_Numero>";
         }
-            $content .= "</Nota>"
-            . "</SDT_IMPRESSAO_IN>";
+            $content .= "</nfe:Nota>"
+            . "</nfe:SDT_IMPRESSAO_IN>";
         
         return $this->send($content, $operation);
     }
