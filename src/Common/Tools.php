@@ -15,10 +15,8 @@ namespace NFePHP\NFSeTrans\Common;
  * @link      http://github.com/nfephp-org/sped-nfse-etransparencia for the canonical source repository
  */
 
-use NFePHP\Common\Certificate;
 use NFePHP\NFSeTrans\RpsInterface;
 use NFePHP\Common\DOMImproved as Dom;
-use NFePHP\NFSeTrans\Common\Signer;
 use NFePHP\NFSeTrans\Common\Soap\SoapInterface;
 use NFePHP\NFSeTrans\Common\Soap\SoapCurl;
 
@@ -28,7 +26,6 @@ class Tools
     
     protected $config;
     protected $prestador;
-    protected $certificate;
     protected $wsobj;
     protected $soap;
     protected $environment;
@@ -39,10 +36,9 @@ class Tools
      * @param string $config
      * @param Certificate $cert
      */
-    public function __construct($config, Certificate $cert = null)
+    public function __construct($config)
     {
         $this->config = json_decode($config);
-        $this->certificate = $cert;
         $this->storage = realpath(
             __DIR__ . '/../../storage/'
         );
@@ -87,7 +83,7 @@ class Tools
         $this->lastRequest = $request;
         
         if (empty($this->soap)) {
-            $this->soap = new SoapCurl($this->certificate);
+            $this->soap = new SoapCurl();
         }
         $msgSize = strlen($request);
         $parameters = [

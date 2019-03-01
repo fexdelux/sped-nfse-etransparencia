@@ -4,7 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 require_once '../bootstrap.php';
 
-use NFePHP\Common\Certificate;
 use NFePHP\NFSeTrans\Tools;
 use NFePHP\NFSeTrans\Rps;
 use NFePHP\NFSeTrans\Common\Soap\SoapFake;
@@ -26,16 +25,9 @@ try {
     ];
 
     $configJson = json_encode($config);
-
-    //$content = file_get_contents('expired_certificate.pfx');
-    //$password = 'associacao';
-    //$cert = Certificate::readPfx($content, $password);
-    $cert = null;
-
     $soap = new SoapFake();
-    $soap->disableCertValidation(true);
 
-    $tools = new Tools($configJson, $cert);
+    $tools = new Tools($configJson);
     $tools->loadSoapClass($soap);
 
     $arps = [];
@@ -44,7 +36,7 @@ try {
     $std->tipo = "RPS"; //Tipo de NFS 'RPS' e 'RPC'.
     $std->numero = 12; //9 numericos
     $std->serie = "A"; //string 3
-    $std->dtemi = "10/11/2018"; //dd/mm/yyyy
+    $std->dtemi = "2018-11-10"; //dd/mm/yyyy
     $std->retfonte = "SIM"; //retenção na fonte SIM ou NAO.
     $std->codsrv = "16.38"; //codigo do serviço string até 10
     $std->discrsrv = 'Discriminação da natureza do serviço prestado \\\ indica quebra de linha'; //Discriminação da natureza do serviço prestado \\ indica quebra de linha

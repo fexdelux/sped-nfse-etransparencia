@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 require_once '../bootstrap.php';
 
-use NFePHP\Common\Certificate;
 use NFePHP\NFSeTrans\Tools;
 use NFePHP\NFSeTrans\Rps;
 use NFePHP\NFSeTrans\Common\Soap\SoapFake;
@@ -24,18 +23,22 @@ try {
         'tpamb'        => 2 //1-producao, 2-homologacao
     ];
 
-
+    /**
+     * tipotrib
+     * 1 - Tributado. O Serviço é tributado de acordo com a alíquota ISS da lista de serviços da prefeitura;
+     * 2 - Isenção / Imunidade. Neste caso a alíquota de ISS é igual a zero.
+     * 3 - Suspensão. Se a tributação está em decisão judicial, será acatada a alíquota de ISS informada no RPS, podendo esta ser igual a zero.
+     * 4 - Simples Nacional. O serviço é tributado de acordo com a alíquota do contribuinte no Simples Nacional;
+     * 5 - ISS Fixo; Neste caso a alíquota de ISS a enviar deve ser igual a zero.
+     * 6 - Isenção parcial. O serviço é tributado de acordo com a Alíquota no Cadastro do contribuinte. Esta não é a alíquota do simples nacional.
+     * Este numero deve corresponder ao mesmo tipo de tributação do cadastro do contribuinte.
+     */
+    
+    
     $configJson = json_encode($config);
-
-    //$content = file_get_contents('expired_certificate.pfx');
-    //$password = 'associacao';
-    //$cert = Certificate::readPfx($content, $password);
-    $cert = null;
-    
     $soap = new SoapFake();
-    $soap->disableCertValidation(true);
     
-    $tools = new Tools($configJson, $cert);
+    $tools = new Tools($configJson);
     $tools->loadSoapClass($soap);
     
     $arps = [];
