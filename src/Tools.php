@@ -144,13 +144,12 @@ class Tools extends BaseTools
         if ($this->config->webservice == 1) {
             return;
         }
-        $version = number_format($this->config->webservice, 2, '.', '');
         $operation = "IMPRESSAOLINKNFSE";
         $content = "<SDT_IMPRESSAO_IN xmlns=\"NFe\">"
             . "<Login>"
             . "<CodigoUsuario>{$this->config->usuario}</CodigoUsuario>"
             . "<CodigoContribuinte>{$this->config->contribuinte}</CodigoContribuinte>"
-            . "<Versao>{$version}</Versao>"
+            . "<Versao>{$this->wsobj->versao}</Versao>"
             . "</Login>"
             . "<Nota>"
             . "<Competencia_Mes>{$mes}</Competencia_Mes>"
