@@ -68,7 +68,6 @@ class Tools extends BaseTools
             . "<nfe:PodeCancelarGuia>$cancelarGuia</nfe:PodeCancelarGuia>"
             . "</nfe:Nota>"
             . "</nfe:Sdt_cancelanfe>";
-        
         return $this->send($content, $operation);
     }
    
@@ -99,7 +98,6 @@ class Tools extends BaseTools
             . "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
             . $this->login()
             . "</nfe:Sdt_consultanotasprotocoloin>";
-        
         return $this->send($content, $operation);
     }
     
@@ -146,23 +144,23 @@ class Tools extends BaseTools
         if ($this->config->webservice == 1) {
             return;
         }
-        
+        $version = number_format($this->config->webservice, 2, '.', '');
         $operation = "IMPRESSAOLINKNFSE";
-        $content = "<nfe:SDT_IMPRESSAO_IN>"
-            . $this->login()
-            . "<nfe:Nota>"
-            . "<nfe:Competencia_Mes>{$mes}</nfe:Competencia_Mes>"
-            . "<nfe:Competencia_Ano>{$ano}</nfe:Competencia_Ano>";
-        if (!empty($rps_serie) && !empty($rps_num)) {
-            $content .= "<nfe:RPS_Serie>{$rps_serie}</nfe:RPS_Serie>"
-            . "<nfe:RPS_Numero>{$rps_num}</nfe:RPS_Numero>";
-        } else {
-            $content .= "<nfe:Nota_Serie>{$nfe_serie}</nfe:Nota_Serie>"
-            . "<nfe:Nota_Numero>{$rps_num}</nfe:Nota_Numero>";
-        }
-            $content .= "</nfe:Nota>"
-            . "</nfe:SDT_IMPRESSAO_IN>";
-        
+        $content = "<SDT_IMPRESSAO_IN xmlns=\"NFe\">"
+            . "<Login>"
+            . "<CodigoUsuario>{$this->config->usuario}</CodigoUsuario>"
+            . "<CodigoContribuinte>{$this->config->contribuinte}</CodigoContribuinte>"
+            . "<Versao>{$version}</Versao>"
+            . "</Login>"
+            . "<Nota>"
+            . "<Competencia_Mes>{$mes}</Competencia_Mes>"
+            . "<Competencia_Ano>{$ano}</Competencia_Ano>"
+            . "<RPS_Serie>{$rps_serie}</RPS_Serie>"
+            . "<RPS_Numero>{$rps_num}</RPS_Numero>"
+            . "<Nota_Serie>{$nfe_serie}</Nota_Serie>"
+            . "<Nota_Numero>{$nfe_num}</Nota_Numero>"
+            . "</Nota>"
+            . "</SDT_IMPRESSAO_IN>";
         return $this->send($content, $operation);
     }
     
@@ -216,12 +214,15 @@ class Tools extends BaseTools
      * Build tag login
      * @return string
      */
-    protected function login()
+    protected function login($prefix = 'nfe')
     {
-        return "<nfe:Login>"
-            . "<nfe:CodigoUsuario>{$this->config->usuario}</nfe:CodigoUsuario>"
-            . "<nfe:CodigoContribuinte>{$this->config->contribuinte}</nfe:CodigoContribuinte>"
-            . "</nfe:Login>";
+        if (!empty($prefix)) {
+            $prefix .= ":";
+        }
+        return "<{$prefix}Login>"
+            . "<{$prefix}CodigoUsuario>{$this->config->usuario}</{$prefix}CodigoUsuario>"
+            . "<{$prefix}CodigoContribuinte>{$this->config->contribuinte}</{$prefix}CodigoContribuinte>"
+            . "</{$prefix}Login>";
     }
     
     /**
