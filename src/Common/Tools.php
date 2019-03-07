@@ -112,9 +112,9 @@ class Tools
         if ($this->config->webservice == 1) {
             return $content;
         }
+        $message = htmlentities($content, ENT_NOQUOTES, 'UTF-8', false);
+        return "<nfe:Xml_entrada>$message</nfe:Xml_entrada>";
         
-        $message = htmlentities($content, ENT_NOQUOTES);
-        return "<nfe:Xml_entrada>" . htmlentities($content, ENT_NOQUOTES, 'UTF-8', false) . "</nfe:Xml_entrada>";
         /*
         $dom = new \DOMDocument();
         $node = $dom->appendChild($dom->createElement('nfe:Xml_entrada'));
