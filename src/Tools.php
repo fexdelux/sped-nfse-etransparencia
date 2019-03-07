@@ -145,21 +145,21 @@ class Tools extends BaseTools
             return;
         }
         $operation = "IMPRESSAOLINKNFSE";
-        $content = "<SDT_IMPRESSAO_IN xmlns=\"NFe\">"
-            . "<Login>"
-            . "<CodigoUsuario>{$this->config->usuario}</CodigoUsuario>"
-            . "<CodigoContribuinte>{$this->config->contribuinte}</CodigoContribuinte>"
-            . "<Versao>{$this->wsobj->versao}</Versao>"
-            . "</Login>"
-            . "<Nota>"
-            . "<Competencia_Mes>{$mes}</Competencia_Mes>"
-            . "<Competencia_Ano>{$ano}</Competencia_Ano>"
-            . "<RPS_Serie>{$rps_serie}</RPS_Serie>"
-            . "<RPS_Numero>{$rps_num}</RPS_Numero>"
-            . "<Nota_Serie>{$nfe_serie}</Nota_Serie>"
-            . "<Nota_Numero>{$nfe_num}</Nota_Numero>"
-            . "</Nota>"
-            . "</SDT_IMPRESSAO_IN>";
+        $content = "<nfe:SDT_IMPRESSAO_IN xmlns:nfe=\"NFe\">"
+            . "<nfe:Login>"
+            . "<nfe:CodigoUsuario>{$this->config->usuario}</nfe:CodigoUsuario>"
+            . "<nfe:CodigoContribuinte>{$this->config->contribuinte}</nfe:CodigoContribuinte>"
+            . "<nfe:Versao>{$this->wsobj->versao}</nfe:Versao>"
+            . "</nfe:Login>"
+            . "<nfe:Nota>"
+            . "<nfe:Competencia_Mes>{$mes}</nfe:Competencia_Mes>"
+            . "<nfe:Competencia_Ano>{$ano}</nfe:Competencia_Ano>"
+            . "<nfe:RPS_Serie>{$rps_serie}</nfe:RPS_Serie>"
+            . "<nfe:RPS_Numero>{$rps_num}</nfe:RPS_Numero>"
+            . "<nfe:Nota_Serie>{$nfe_serie}</nfe:Nota_Serie>"
+            . "<nfe:Nota_Numero>{$nfe_num}</nfe:Nota_Numero>"
+            . "</nfe:Nota>"
+            . "</nfe:SDT_IMPRESSAO_IN>";
         return $this->send($content, $operation);
     }
     
