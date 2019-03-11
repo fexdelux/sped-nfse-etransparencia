@@ -14,7 +14,6 @@ namespace NFePHP\NFSeTrans\Common;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-nfse-etransparencia for the canonical source repository
  */
-
 use NFePHP\NFSeTrans\RpsInterface;
 use NFePHP\Common\DOMImproved as Dom;
 use NFePHP\NFSeTrans\Common\Soap\SoapInterface;
@@ -22,8 +21,8 @@ use NFePHP\NFSeTrans\Common\Soap\SoapCurl;
 
 class Tools
 {
+
     public $lastRequest;
-    
     protected $config;
     protected $prestador;
     protected $wsobj;
@@ -63,7 +62,7 @@ class Tools
             $this->environment = 'producao';
         }
     }
-    
+
     /**
      * SOAP communication dependency injection
      * @param SoapInterface $soap
@@ -72,7 +71,7 @@ class Tools
     {
         $this->soap = $soap;
     }
-    
+
     /**
      * Send message to webservice
      * @param string $message
@@ -106,22 +105,23 @@ class Tools
         );
         return $response;
     }
-    
+
     protected function cdtata($content)
     {
         if ($this->config->webservice == 1) {
             return $content;
         }
+        $content = \NFePHP\Common\Strings::toASCII($content);
         $message = htmlentities($content, ENT_NOQUOTES, 'UTF-8', false);
         return "<nfe:Xml_entrada>$message</nfe:Xml_entrada>";
-        
+
         /*
         $dom = new \DOMDocument();
         $node = $dom->appendChild($dom->createElement('nfe:Xml_entrada'));
         $node->appendChild($dom->createCDATASection($content));
         $content = $dom->saveXML($dom->documentElement);
         return $content;
-         */
+        */
     }
 
     /**
@@ -142,7 +142,7 @@ class Tools
             . "</nfe:ws_nfe.$operation>"
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
-        
+
         return $env;
     }
 }

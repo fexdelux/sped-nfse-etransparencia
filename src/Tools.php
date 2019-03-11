@@ -51,8 +51,11 @@ class Tools extends BaseTools
         $numerorps = null
     ) {
         $operation = "CANCELANOTAELETRONICA";
-        $content = "<nfe:Sdt_cancelanfe>"
-            . $this->login()
+        $content = "<nfe:Sdt_cancelanfe>";
+        if ($this->config->webservice > 1) {
+            $content = "<nfe:Sdt_cancelanfe> xmlns:nfe=\"NFe\">";
+        }
+        $content .= $this->login()
             . "<nfe:Nota>";
         if (!empty($numeronfse)) {
             $content .= "<nfe:SerieNota>$serienfse</nfe:SerieNota>"
@@ -79,8 +82,12 @@ class Tools extends BaseTools
     public function consultarNfse($protocolo)
     {
         $operation = "CONSULTAPROTOCOLO";
-        $content = "<nfe:Sdt_consultaprotocoloin>"
-            . "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
+        $content = "<nfe:Sdt_consultaprotocoloin>";
+        if ($this->config->webservice > 1) {
+            $content = "<nfe:Sdt_consultaprotocoloin> xmlns:nfe=\"NFe\">";
+        }
+        
+        $content .= "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
             . $this->login()
             . "</nfe:Sdt_consultaprotocoloin>";
         return $this->send($content, $operation);
@@ -94,8 +101,11 @@ class Tools extends BaseTools
     public function consultarLoteRps($protocolo)
     {
         $operation = "CONSULTANOTASPROTOCOLO";
-        $content = "<nfe:Sdt_consultanotasprotocoloin>"
-            . "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
+        $content = "<nfe:Sdt_consultanotasprotocoloin>";
+        if ($this->config->webservice > 1) {
+            $content = "<nfe:Sdt_consultanotasprotocoloin xmlns:nfe=\"NFe\">";
+        }
+        $content .= "<nfe:Protocolo>$protocolo</nfe:Protocolo>"
             . $this->login()
             . "</nfe:Sdt_consultanotasprotocoloin>";
         return $this->send($content, $operation);
@@ -165,8 +175,12 @@ class Tools extends BaseTools
     
     protected function buildRps($arps)
     {
-        $content = "<nfe:Sdt_processarpsin>"
-            . $this->login()
+        $content = "<nfe:Sdt_processarpsin>";
+        if ($this->config->webservice > 1) {
+            $content = "<nfe:Sdt_processarpsin xmlns:nfe=\"NFe\">";
+        }
+        
+        $content .= $this->login()
             . "<nfe:SDTRPS>"
             . $this->buildInfo($this->totalize($arps))
             . "<nfe:Reg20>";
@@ -178,6 +192,8 @@ class Tools extends BaseTools
             $this->reg90
             . "</nfe:SDTRPS>"
             . "</nfe:Sdt_processarpsin>";
+        
+        //$content = str_replace('nfe:', '', $content);
         return $content;
     }
 
