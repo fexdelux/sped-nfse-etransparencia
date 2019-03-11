@@ -51,10 +51,10 @@ try {
     $std->dtemi = "2019-02-28"; //yyyy-mm-dd
     $std->retfonte = "SIM"; //retenção na fonte SIM ou NAO.
     $std->codsrv = "16.38"; //codigo do serviço string até 10
-    $std->discrsrv = 'Discriminação da natureza do serviço prestado \\\ indica quebra de linha'; //Discriminação da natureza do serviço prestado \\ indica quebra de linha
+    $std->discrsrv = 'Discriminacao da natureza do serviço prestado \\\ indica quebra de linha'; //Discriminação da natureza do serviço prestado \\ indica quebra de linha
     $std->vlnfs = 1245.89; //Numérico 16,2
     $std->vlded = 123.64; //Numérico 16,2
-    $std->discrded = "Obrigatório se Valor da dedução > 0"; //string 4000 Obrigatório se Valor da dedução > 0. Ele poderá também
+    $std->discrded = "Obrigatorio se Valor da dedução > 0"; //string 4000 Obrigatório se Valor da dedução > 0. Ele poderá também
     //poderá ser utilizado caso o operador necessite informar
     //retenções obrigatórias como IRPJ, PIS, COFINS, CSLL,
     //INSS etc., sem necessariamente ter um valor no campo
